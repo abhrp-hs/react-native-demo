@@ -10,3 +10,4 @@ android/app/build/
 
 #iOS excludes
 ios/build/
+android/local.properties
