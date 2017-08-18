@@ -1,0 +1,9 @@
+#Root excludes
+.vscode
+node_modules/
+
+
+#Android excludes
+android/.gradle
+android/.idea
+android/app/build/
