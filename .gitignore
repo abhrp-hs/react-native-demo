@@ -7,3 +7,6 @@ node_modules/
 android/.gradle
 android/.idea
 android/app/build/
+
+#iOS excludes
+ios/build/
