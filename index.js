@@ -12,15 +12,46 @@ import {
   View,
   Image,
   StatusBar,
-  ScrollView
+  ScrollView,
+  Button,
+  Alert
 } from 'react-native';
 
+class Blink extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showText: true};
+    setInterval(() => {
+      this.setState(previousState => {
+        return { showText: !previousState.showText };
+      });
+    }, 5000);
+  }
+
+  render(){
+    let display = this.state.showText ? this.props.text : ' ';
+    return <Text style={styles.bodyText}>{display}</Text>;
+  }
+}
+
+
 export default class FirstDemo extends Component {
+
+  onButtonPress() {
+    Alert.alert('You tapped the button');
+  }
+
   render() {
-    let pic = {uri: 'https://media4.popsugar-assets.com/files/2015/06/01/782/n/1922398/af0f7c22_Come-at-me-bro.xxxlarge.gif'};
+    let pic = {
+      uri: 'https://media4.popsugar-assets.com/files/2015/06/01/782/n/1922398/af0f7c22_Come-at-me-bro.xxxlarge.gif'
+    };
     return (
       <ScrollView>
-        <Text style={styles.bodyText}>Hello World</Text>
+        <Blink text='I love to blink' />
+        <Button
+          onPress = {this.onButtonPress}
+          title = "Learn More"
+          color = "#841584" />        
         <Text style={styles.bodyText}>Look what i found</Text>
         <Text style={styles.bodyText}>Tan tan tana tan tan tana tan tan...</Text>
         <Image source={pic} style={{width: 500, height: 400}}/>
