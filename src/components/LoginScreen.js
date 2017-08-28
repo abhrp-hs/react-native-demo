@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { View } from "react-native";
 import Logo from './Logo';
 import Form from './Form';
 import Wallpaper from './Wallpaper';
