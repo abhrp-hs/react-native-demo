@@ -70,9 +70,9 @@ apply plugin: "com.android.application"
  */
  project.ext.react = [
  // the name of the generated asset file containing your JS bundle
-    bundleAssetName: "toolbar.android.bundle",
+    bundleAssetName: "login.android.bundle",
   // the entry file for bundle generation
-    entryFile: "toolbar.js",
+    entryFile: "login.js",
     bundleInDebug: true,
     bundleInRelease: true
  ]
