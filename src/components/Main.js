@@ -4,7 +4,7 @@ import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 //import LoginScreen from './LoginScreen';
 import HSLogin from "../component/HSLogin";
 import SecondScreen from './SecondScreen';
-import GetStarted from '../component/GetStarted';
+import EnterBatchId from '../component/EnterBatchId';
 
 export default class Main extends Component {
   render() {
@@ -16,8 +16,8 @@ export default class Main extends Component {
 	          hideNavBar={true}
 	          initial={true}
 	        />
-					<Scene key = "getStarted"
-						component = {GetStarted}
+					<Scene key = "enterBatchId"
+						component = {EnterBatchId}
 						animation = 'fade'
 						hideNavBar = {true}
 					/>
