@@ -14,11 +14,10 @@ export default class EnterBatchId extends Component {
     
     onSubmitPress = () => {
         const {batchId} = this.state;
-        console.log(authToken);
         if (batchId == '') {
             Alert.alert("Please Enter Batch ID")
         } else {
-            fetch('https://internals.hopscotch.in/ops_api/quality_control/batch/details/399', {
+            fetch('https://internals.hopscotch.in/ops_api/quality_control/batch_details/' + batchId, {
                 method : 'GET',
                 headers: {
                     'Accept' : 'application/json',
@@ -32,7 +31,6 @@ export default class EnterBatchId extends Component {
                     Toast.show("Response " + responseData.payload.vendor_id, Toast.LONG);
                     //Alert.alert(JSON.stringify(responseData));
                 } catch (error) {
-                    console.error(error);
                 }
             })
             .done();
