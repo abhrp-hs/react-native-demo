@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 
-//import LoginScreen from './LoginScreen';
 import HSLogin from "../component/HSLogin";
-import SecondScreen from './SecondScreen';
 import EnterBatchId from '../component/EnterBatchId';
+import SkuSearch from '../component/SkuSearch';
 
 export default class Main extends Component {
   render() {
@@ -20,12 +19,12 @@ export default class Main extends Component {
 						component = {EnterBatchId}
 						animation = 'fade'
 						hideNavBar = {true}
+					/>				
+					<Scene key = "skuSearch"
+						component = {SkuSearch}
+						animation = 'fade'
+						hideNavBar = {true}
 					/>
-	        <Scene key="secondScreen"
-	          component={SecondScreen}
-	          animation='fade'
-	          hideNavBar={true}
-	        />					
 	      </Scene>
 	    </Router>
 	  );

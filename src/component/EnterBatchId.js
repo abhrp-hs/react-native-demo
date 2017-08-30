@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar, { NavTitle } from "react-native-nav";
 import Toast from "react-native-simple-toast";
+import { Actions, ActionConst } from "react-native-router-flux";
 import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, AsyncStorage } from "react-native";
 
 export default class EnterBatchId extends Component {
@@ -17,7 +18,7 @@ export default class EnterBatchId extends Component {
         if (batchId == '') {
             Alert.alert("Please Enter Batch ID")
         } else {
-            fetch('https://internals.hopscotch.in/ops_api/quality_control/batch_details/' + batchId, {
+            fetch('https://internals.hopscotch.in/ops_api/quality_control/batch/' + batchId, {
                 method : 'GET',
                 headers: {
                     'Accept' : 'application/json',
@@ -29,7 +30,8 @@ export default class EnterBatchId extends Component {
             .then((responseData) => {
                 try {
                     Toast.show("Response " + responseData.payload.vendor_id, Toast.LONG);
-                    //Alert.alert(JSON.stringify(responseData));
+                    Alert.alert(JSON.stringify(responseData));
+                    Actions.skuSearch({text : responseData.payload});
                 } catch (error) {
                 }
             })
