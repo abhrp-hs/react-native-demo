@@ -32,7 +32,7 @@ export default class SkuSearch extends Component {
                 </View>
                 <ListView style = {styles.listViewContainer} 
                     dataSource = {this.state.dataSource}
-                    renderRow = { (data) => <View><Text>{data.vsku} </Text></View>} />
+                    renderRow = { (data) => <SkuRow {...data}/> } />
                 <View style = {styles.footer}>
                     <Text style = {styles.noOfSkuText}>
                         0 of 122 VSKUs reported
