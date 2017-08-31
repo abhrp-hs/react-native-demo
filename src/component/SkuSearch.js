@@ -20,7 +20,7 @@ export default class SkuSearch extends Component {
             <View style = { styles.searchSkuPage}>
                 <NavBar>
                     <NavTitle>
-                        {"Batch " + this.props.payload.id}
+                        {"Batch " + this.props.id}
                     </NavTitle>
                 </NavBar>
                 <View style = {styles.searchSku}>
@@ -47,13 +47,14 @@ export default class SkuSearch extends Component {
 }
 
 class RowSku extends Component {
-    onImageClick() {
-        Actions.skuDetail();
+    onImageClick(text) {
+        Actions.skuDetail({skuImage : this.props.image});
+        console.log(text);
     }
     render () {
         return (
             <View style={styles.skuRowContainer}>
-                <TouchableHighlight onPress={this.onImageClick}>
+                <TouchableHighlight onPress={() => this.onImageClick(this.props.image)}>
                     <Image source={{ uri: this.props.image }} style={styles.skuPhoto} />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={this.onImageClick}>
