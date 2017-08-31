@@ -10,10 +10,10 @@ export default class SkuSearch extends Component {
 
     constructor(props) {
         super(props);
-
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const dResponse = this.props.text.vsku_details;
         this.state = {
-            dataSource: ds.cloneWithRows([ 'row 1', 'row 2'])
+            dataSource: ds.cloneWithRows(dResponse)
         };
     }
 
@@ -32,7 +32,7 @@ export default class SkuSearch extends Component {
                 </View>
                 <ListView style = {styles.listViewContainer} 
                     dataSource = {this.state.dataSource}
-                    renderRow = {(data) => <SkuRow {...this.props.text.vsku_details}/>} />
+                    renderRow = { (data) => <View><Text>{data.vsku} </Text></View>} />
                 <View style = {styles.footer}>
                     <Text style = {styles.noOfSkuText}>
                         0 of 122 VSKUs reported
