@@ -4,6 +4,7 @@ import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 import HSLogin from "../component/HSLogin";
 import EnterBatchId from '../component/EnterBatchId';
 import SkuSearch from '../component/SkuSearch';
+import SkuDetail from '../component/SkuDetail';
 
 export default class Main extends Component {
   render() {
@@ -22,6 +23,11 @@ export default class Main extends Component {
 					/>				
 					<Scene key = "skuSearch"
 						component = {SkuSearch}
+						animation = 'fade'
+						hideNavBar = {true}
+					/>
+					<Scene key = "skuDetail"
+						component = {SkuDetail}
 						animation = 'fade'
 						hideNavBar = {true}
 					/>

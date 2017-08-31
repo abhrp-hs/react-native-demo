@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Alert, TouchableHighlight } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,9 +19,15 @@ const styles = StyleSheet.create({
   }
 });
 
+function onImageClick() {
+  Alert.alert("Image Button Clicked");
+};
+
 const SkuRow = props =>
   <View style={styles.container}>
-    <Image source={{ uri: props.image }} style={styles.photo} />
+    <TouchableHighlight onPress = {onImageClick}>
+      <Image source={{ uri: props.image }} style={styles.photo} />
+    </TouchableHighlight>
     <Text style={styles.text}>
       {`${props.vsku}`}
     </Text>
