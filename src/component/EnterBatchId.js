@@ -29,8 +29,8 @@ export default class EnterBatchId extends Component {
             .then((response) => response.json())
             .then((responseData) => {
                 try {
-                    Toast.show("Response " + responseData.payload.vendor_id, Toast.LONG);
-                    Alert.alert(JSON.stringify(responseData));
+                    //Toast.show("Response " + responseData.payload.vendor_id, Toast.LONG);
+                    //Alert.alert(JSON.stringify(responseData));
                     Actions.skuSearch({payload : responseData.payload, id : batchId});
                 } catch (error) {
                 }

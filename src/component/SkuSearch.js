@@ -30,7 +30,7 @@ export default class SkuSearch extends Component {
                 </View>
                 <ListView style = {styles.listViewContainer} 
                     dataSource = {this.state.dataSource}
-                    renderRow={rowData => <RowSku image={rowData.image} vsku ={rowData.vsku}/>}/>
+                    renderRow={rowData => <RowSku image={rowData.image} vsku ={rowData.vsku} skudata = {rowData}/>}/>
                 <View style = {styles.footer}>
                     <Text style = {styles.noOfSkuText}>
                         0 of 122 VSKUs reported
@@ -48,18 +48,18 @@ export default class SkuSearch extends Component {
 
 class RowSku extends Component {
     onImageClick(text) {
-        Actions.skuDetail({skuImage : this.props.image});
+        Actions.skuDetail({skudata : this.props.skudata});
         console.log(text);
     }
     render () {
         return (
             <View style={styles.skuRowContainer}>
-                <TouchableHighlight onPress={() => this.onImageClick(this.props.image)}>
+                <TouchableHighlight onPress={() => this.onImageClick(this.props.skudata)}>
                     <Image source={{ uri: this.props.image }} style={styles.skuPhoto} />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={this.onImageClick}>
                     <Text style={styles.vskuText}>
-                        {this.props.vsku}
+                        {this.props.skudata.vsku}
                     </Text>
                 </TouchableHighlight>
             </View>
