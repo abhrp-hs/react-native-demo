@@ -7,15 +7,29 @@ export default class SkuDetail extends Component {
 
     constructor(props) {
         super(props);
-        const arr = [];
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const defectRowArray = [];
         this.state = {
-            dataSource: ds.cloneWithRows([1])
+            dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+            refreshing: false
         };
     }
 
-    onAddDefectPress () {
-        Alert.alert("Button Pressed");
+    componentWillMount() {
+        this.defectRowArray = [];
+        for (let i = 0; i < 1; i++) {
+            this.defectRowArray.push({ keyy: i, data: "row" + i });
+        }
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(this.defectRowArray)
+        });
+    }
+
+    addDefectRow() {
+        let i = this.defectRowArray.length;
+        this.defectRowArray.push({ keyy: i, data: "row" + i });
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(this.defectRowArray)
+        });
     }
 
     render() {
@@ -42,7 +56,7 @@ export default class SkuDetail extends Component {
                         renderRow = {rowdata => <DefectType />}
                     />
                     <Text style = {styles.addDefectButton}
-                          onPress = {this.onAddDefectPress}>                        
+                          onPress = {this.addDefectRow.bind(this)}>                        
                         + ADD DEFECT
                     </Text>
                 </View>
