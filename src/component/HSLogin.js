@@ -75,7 +75,7 @@ export default class HSLogin extends Component {
                     </NavTitle>
                 </NavBar>
                 <View style = {styles.inputEmail}>
-                    <TextInput                    
+                    <TextInput style = {{marginLeft: 16}}                    
                         placeholder = "Enter Email"
                         defaultValue = "anilc@hopscotch.in"
                         underlineColorAndroid = "transparent"
@@ -84,6 +84,7 @@ export default class HSLogin extends Component {
                 </View>
                 <View style = {styles.inputPassword}>
                     <TextInput
+                        style = {{marginLeft: 16}}
                         placeholder = "Password"
                         secureTextEntry = {true}       
                         defaultValue = "anil11"   

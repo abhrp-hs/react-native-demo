@@ -67,19 +67,23 @@ export default class SkuDetail extends Component {
                     </TouchableHighlight>            
                     <View style = {styles.defectiveQuantityContainer}>
                         <Text style = {styles.defectiveQuantityLabel}>Defective quantity</Text>
-                        <TextInput style = {styles.defectiveQuantityInput}
-                            keyboardType = "numeric"
-                            underlineColorAndroid = "transparent"
-                            placeholder = "Qty"
-                        />
+                        <View style = {styles.defectiveQuantityInput}>
+                            <TextInput style = {{marginLeft: 16}}
+                                keyboardType = "numeric"
+                                underlineColorAndroid = "transparent"
+                                placeholder = "Qty"
+                            />
+                        </View>
                     </View>
                     <View style = {styles.replacedQuantityContainer}>
                         <Text style = {styles.replacedQuantityLabel}>Replaced Quantity</Text>
-                        <TextInput style = {styles.replacedQuantityInput}
-                            keyboardType = "numeric"
-                            underlineColorAndroid = "transparent"
-                            placeholder = "Qty"
-                        />
+                        <View style = {styles.replacedQuantityInput}>
+                            <TextInput style = {{marginLeft: 16}}
+                                keyboardType = "numeric"
+                                underlineColorAndroid = "transparent"
+                                placeholder = "Qty"
+                            />
+                        </View>
                     </View>
                     <TouchableHighlight style = {styles.doneButton} onPress = {this.onDoneClick.bind(this)} >
                         <Text style = {styles.doneButtonText}>Done</Text>
@@ -94,15 +98,19 @@ class DefectType extends Component {
     render() {
         return (
             <View style = {styles.defectViewContainer}>
-                <TextInput style = {styles.defectTypeInputText}
-                    placeholder = "Type"
-                    underlineColorAndroid = "transparent"
-                />
-                <TextInput style = {styles.defectQtyInputText}
-                    placeholder = "Qty"
-                    keyboardType = "numeric"
-                    underlineColorAndroid = "transparent"
-                />
+                <View style = {styles.defectTypeInputText}>
+                    <TextInput style = {{marginLeft: 16}}
+                        placeholder = "Type"
+                        underlineColorAndroid = "transparent"
+                    />
+                </View>
+                <View style = {styles.defectQtyInputText}>
+                    <TextInput style = {{marginLeft: 16}}
+                        placeholder = "Qty"
+                        keyboardType = "numeric"
+                        underlineColorAndroid = "transparent"
+                    />
+                </View>
             </View>
         );
     }

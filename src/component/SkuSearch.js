@@ -24,7 +24,7 @@ export default class SkuSearch extends Component {
                     </NavTitle>
                 </NavBar>
                 <View style = {styles.searchSku}>
-                    <TextInput 
+                    <TextInput style = {{marginLeft: 16}}
                         placeholder = " Search VSKU"
                         underlineColorAndroid = "transparent">
                     </TextInput>

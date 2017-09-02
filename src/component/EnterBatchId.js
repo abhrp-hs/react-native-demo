@@ -49,6 +49,7 @@ export default class EnterBatchId extends Component {
                 </NavBar>    
                 <View style = {styles.inputBatchId}>
                     <TextInput
+                        style = {{marginLeft : 16}}
                         placeholder = "Batch ID"
                         keyboardType = "numeric"
                         underlineColorAndroid = "transparent"

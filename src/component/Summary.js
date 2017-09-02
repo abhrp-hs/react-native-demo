@@ -26,7 +26,7 @@ export default class Summary extends Component {
                 </NavBar>
                 <ScrollView>
                     <View style = {styles.inspectResultPicker}>
-                        <Picker
+                        <Picker style = {{marginLeft: 16}}
                             selectedValue = {this.state.inspectResult}
                             onValueChange = {(itemValue, itemIndex) => this.setState({inspectResult: itemValue})}>
                             <Picker.Item label = "Accept" value = "Accept"/>
@@ -40,22 +40,26 @@ export default class Summary extends Component {
                         <Text style = {styles.inspectedPiecesLabel}>
                             No. of inspected pieces 
                         </Text>
-                        <TextInput style = {styles.inspectedPiecesInput}
-                            placeholder = "Qty"
-                            keyboardType = "numeric"
-                        />
+                        <View style = {styles.inspectedPiecesInput}>
+                            <TextInput style = {{marginLeft: 16}}
+                                placeholder = "Qty"
+                                keyboardType = "numeric"
+                            />
+                        </View>
                     </View>
                     <View style = {styles.inspectedPiecesContainer}>
                         <Text style = {styles.inspectedPiecesLabel}>
                             No. of rejected pieces
                         </Text>
-                        <TextInput style = {styles.inspectedPiecesInput}
-                            placeholder = "Qty"
-                            keyboardType = "numeric"
-                        />
+                        <View style = {styles.inspectedPiecesInput}>
+                            <TextInput style = {{marginLeft: 16}}
+                                placeholder = "Qty"
+                                keyboardType = "numeric"
+                            />
+                        </View>
                     </View>
                     <View style = {styles.remarkContainer}>
-                        <TextInput placeholder = "Remarks"/>
+                        <TextInput style = {{marginLeft: 16}} placeholder = "Remarks"/>
                     </View>
                     <View style = {styles.uploadCOntainer}> 
                         <Image source = {eyeImag} style = {styles.uploadIcon} />
