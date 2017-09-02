@@ -59,7 +59,9 @@ export default class SkuDetail extends Component {
                         dataSource = {this.state.dataSource}
                         renderRow = {rowdata => <DefectType />}
                     />
-                    <TouchableHighlight style = {styles.addDefectButtonView} 
+                    <TouchableHighlight 
+                            style = {styles.addDefectButtonView} 
+                            underlayColor = "white"
                             onPress = {this.addDefectRow.bind(this)}>
                         <Text style = {styles.addDefectButton}>
                             + ADD DEFECT
@@ -85,7 +87,10 @@ export default class SkuDetail extends Component {
                             />
                         </View>
                     </View>
-                    <TouchableHighlight style = {styles.doneButton} onPress = {this.onDoneClick.bind(this)} >
+                    <TouchableHighlight 
+                            style = {styles.doneButton} 
+                            underlayColor = "white"
+                            onPress = {this.onDoneClick.bind(this)} >
                         <Text style = {styles.doneButtonText}>Done</Text>
                     </TouchableHighlight>
                 </View>
@@ -133,12 +138,14 @@ const styles = StyleSheet.create({
     vskuLable:{
         marginLeft: 16,
         fontSize: 12,
-        height: 16
+        height: 16,
+        color: 'rgba(0,0,0,0.56)'
     },
     vskuText: {
         marginLeft: 16,
         height: 24,
-        fontSize: 16
+        fontSize: 16,
+        color: 'rgba(0,0,0,0.80)'
     },
     quantityLabel: {
         marginLeft: 16,
@@ -150,7 +157,8 @@ const styles = StyleSheet.create({
         marginLeft: 32,
         marginTop: 24,
         height: 24,
-        fontSize: 20
+        fontSize: 20,
+        color: 'black'
     },
     defectViewContainer: {
         marginLeft: 32,
@@ -200,24 +208,28 @@ const styles = StyleSheet.create({
     defectiveQuantityLabel: {
         height: 24,
         fontSize: 16,
-        marginTop: 16
+        marginTop: 16,
+        color: 'black'
     },
     defectiveQuantityInput: {
         marginLeft: 70,
         height: 56,
         width: 88,
+        flex: 1,
         borderRadius: 4,
         backgroundColor: 'rgba(0,0,0, 0.06)'
     },
     replacedQuantityLabel: {
         height: 24,
         fontSize: 16,
-        marginTop: 16
+        marginTop: 16,
+        color: 'black'
     },
     replacedQuantityInput: {
         marginLeft: 70,
         height: 56,
         width: 88,
+        flex: 1,
         borderRadius: 4,
         backgroundColor: 'rgba(0,0,0, 0.06)'
     },

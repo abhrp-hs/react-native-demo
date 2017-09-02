@@ -58,6 +58,7 @@ export default class EnterBatchId extends Component {
                 </View>     
                 <TouchableHighlight
                     style = {styles.submitButton}
+                    underlayColor = "#007ac1"
                     onPress = {this.onSubmitPress}>
                     <Text style = {styles.submitButtonText} >
                         SUBMIT

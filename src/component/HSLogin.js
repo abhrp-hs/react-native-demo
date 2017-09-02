@@ -18,8 +18,8 @@ export default class HSLogin extends Component {
         try {
             const token = await AsyncStorage.getItem('@AuthToken:key');
             const email = await AsyncStorage.getItem('@Email:key');
-            Toast.show(token);
-            Toast.show(email);
+            //Toast.show(token);
+            //Toast.show(email);
         } catch (error) {
             Alert.alert("Error in Retrieving Data");
         }
@@ -94,6 +94,7 @@ export default class HSLogin extends Component {
                 </View>
                 <TouchableHighlight 
                     style = {styles.loginButton}
+                    underlayColor = "#007ac1"
                     onPress = {this.onLoginPress}>
                     <Text style = {styles.loginButtonText}>
                         LOGIN
@@ -101,6 +102,7 @@ export default class HSLogin extends Component {
                 </TouchableHighlight> 
                 <TouchableHighlight
                     style = {styles.loginButton}
+                    underlayColor = "#007ac1"
                     onPress = {this.getStorageData}>
                     <Text style = {styles.loginButtonText}>
                         VALUE

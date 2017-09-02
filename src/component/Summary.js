@@ -43,6 +43,7 @@ export default class Summary extends Component {
                         <View style = {styles.inspectedPiecesInput}>
                             <TextInput style = {{marginLeft: 16}}
                                 placeholder = "Qty"
+                                underlineColorAndroid = "transparent"
                                 keyboardType = "numeric"
                             />
                         </View>
@@ -54,12 +55,16 @@ export default class Summary extends Component {
                         <View style = {styles.inspectedPiecesInput}>
                             <TextInput style = {{marginLeft: 16}}
                                 placeholder = "Qty"
+                                underlineColorAndroid = "transparent"
                                 keyboardType = "numeric"
                             />
                         </View>
                     </View>
                     <View style = {styles.remarkContainer}>
-                        <TextInput style = {{marginLeft: 16}} placeholder = "Remarks"/>
+                        <TextInput 
+                            style = {{marginLeft: 16}} 
+                            underlineColorAndroid = "transparent"
+                            placeholder = "Remarks"/>
                     </View>
                     <View style = {styles.uploadCOntainer}> 
                         <Image source = {eyeImag} style = {styles.uploadIcon} />

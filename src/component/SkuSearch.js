@@ -36,7 +36,9 @@ export default class SkuSearch extends Component {
                     <Text style = {styles.noOfSkuText}>
                         0 of 122 VSKUs reported
                     </Text>
-                    <TouchableHighlight style = {styles.proceedButton}>
+                    <TouchableHighlight 
+                        style = {styles.proceedButton}
+                        underlayColor = "#007ac1">
                         <Text style = {styles.proceedButtonText}>
                             PROCEED TO SUMMARY
                         </Text>            
@@ -55,10 +57,15 @@ class RowSku extends Component {
     render () {
         return (
             <View style={styles.skuRowContainer}>
-                <TouchableHighlight onPress={() => this.onImageClick(this.props.skudata)}>
+                <TouchableHighlight 
+                    onPress={() => this.onImageClick(this.props.skudata)}
+                    underlayColor = "white">
                     <Image source={{ uri: this.props.image }} style={styles.skuPhoto} />
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.onImageClick}>
+                <TouchableHighlight 
+                    style = {{height: 72}}
+                    underlayColor = "white"
+                    onPress={() => this.onImageClick(this.props.skudata)}>
                     <Text style={styles.vskuText}>
                         {this.props.skudata.vsku}
                     </Text>
@@ -121,15 +128,17 @@ const styles = StyleSheet.create({
   skuRowContainer: {
     flex: 1,
     marginBottom: 16,
+    marginLeft: 32,
     flexDirection: "row",
     alignItems: "center"
   },
   vskuText: {
     marginLeft: 24,
-    fontSize: 16
+    marginTop: 24,
+    fontSize: 16,
+    color: 'black'
   },
   skuPhoto: {
-    marginLeft: 32,
     height: 72,
     width: 72
   }
