@@ -78,6 +78,7 @@ export default class HSLogin extends Component {
                     <TextInput                    
                         placeholder = "Enter Email"
                         defaultValue = "anilc@hopscotch.in"
+                        underlineColorAndroid = "transparent"
                         onChangeText = {userEmail => this.setState({userEmail})}
                     />
                 </View>
@@ -85,7 +86,8 @@ export default class HSLogin extends Component {
                     <TextInput
                         placeholder = "Password"
                         secureTextEntry = {true}       
-                        defaultValue = "anil11"         
+                        defaultValue = "anil11"   
+                        underlineColorAndroid = "transparent"      
                         onChangeText = {password => this.setState({password})}
                     />
                 </View>
@@ -116,12 +118,16 @@ const styles = StyleSheet.create({
   inputEmail: {
     marginLeft: 32,
     marginRight: 32,
-    marginTop: 140
+    marginTop: 140,
+    borderRadius: 4,
+    backgroundColor: 'rgba(0,0,0, 0.06)'
   },
   inputPassword: {
     marginLeft: 32,
     marginRight: 32,
-    marginTop: 24
+    marginTop: 24,
+    borderRadius: 4,
+    backgroundColor: 'rgba(0,0,0, 0.06)'
   },
   loginButton: {
     width: 88,

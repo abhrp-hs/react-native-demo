@@ -51,6 +51,7 @@ export default class EnterBatchId extends Component {
                     <TextInput
                         placeholder = "Batch ID"
                         keyboardType = "numeric"
+                        underlineColorAndroid = "transparent"
                         onChangeText = {batchId => this.setState({batchId})}
                     />
                 </View>     
@@ -74,7 +75,9 @@ const styles = StyleSheet.create({
     inputBatchId: {
         marginLeft: 32,
         marginRight: 32,
-        marginTop: 180
+        marginTop: 180,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0, 0.06)'
     },
     submitButton: {
         width: 88,

@@ -5,6 +5,7 @@ import HSLogin from "../component/HSLogin";
 import EnterBatchId from '../component/EnterBatchId';
 import SkuSearch from '../component/SkuSearch';
 import SkuDetail from '../component/SkuDetail';
+import Summary from '../component/Summary';
 
 export default class Main extends Component {
   render() {
@@ -30,6 +31,11 @@ export default class Main extends Component {
 						component = {SkuDetail}
 						animation = 'fade'
 						hideNavBar = {true}
+					/>
+					<Scene key = "summary"
+						component = {Summary}
+						animation = 'fade'
+						hideNavBar = {true}				
 					/>
 	      </Scene>
 	    </Router>

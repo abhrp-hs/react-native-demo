@@ -25,7 +25,8 @@ export default class SkuSearch extends Component {
                 </NavBar>
                 <View style = {styles.searchSku}>
                     <TextInput 
-                        placeholder = " Search VSKU">
+                        placeholder = " Search VSKU"
+                        underlineColorAndroid = "transparent">
                     </TextInput>
                 </View>
                 <ListView style = {styles.listViewContainer} 
@@ -75,7 +76,9 @@ const styles = StyleSheet.create({
   searchSku: {
     marginLeft: 32,
     marginRight: 32,
-    marginTop: 24
+    marginTop: 24,
+    borderRadius: 4,
+    backgroundColor: 'rgba(0,0,0, 0.06)'
   },
   listViewContainer: {
     flex: 1,

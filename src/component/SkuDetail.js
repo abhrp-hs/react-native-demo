@@ -32,6 +32,10 @@ export default class SkuDetail extends Component {
         });
     }
 
+    onDoneClick() {
+        Actions.summary({summary :  "This is summary page"});
+    }
+
     render() {
         return <View style={styles.skuDetailpage}>
             <NavBar>
@@ -55,10 +59,31 @@ export default class SkuDetail extends Component {
                         dataSource = {this.state.dataSource}
                         renderRow = {rowdata => <DefectType />}
                     />
-                    <Text style = {styles.addDefectButton}
-                          onPress = {this.addDefectRow.bind(this)}>                        
-                        + ADD DEFECT
-                    </Text>
+                    <TouchableHighlight style = {styles.addDefectButtonView} 
+                            onPress = {this.addDefectRow.bind(this)}>
+                        <Text style = {styles.addDefectButton}>
+                            + ADD DEFECT
+                        </Text>
+                    </TouchableHighlight>            
+                    <View style = {styles.defectiveQuantityContainer}>
+                        <Text style = {styles.defectiveQuantityLabel}>Defective quantity</Text>
+                        <TextInput style = {styles.defectiveQuantityInput}
+                            keyboardType = "numeric"
+                            underlineColorAndroid = "transparent"
+                            placeholder = "Qty"
+                        />
+                    </View>
+                    <View style = {styles.replacedQuantityContainer}>
+                        <Text style = {styles.replacedQuantityLabel}>Replaced Quantity</Text>
+                        <TextInput style = {styles.replacedQuantityInput}
+                            keyboardType = "numeric"
+                            underlineColorAndroid = "transparent"
+                            placeholder = "Qty"
+                        />
+                    </View>
+                    <TouchableHighlight style = {styles.doneButton} onPress = {this.onDoneClick.bind(this)} >
+                        <Text style = {styles.doneButtonText}>Done</Text>
+                    </TouchableHighlight>
                 </View>
             </ScrollView>
           </View>;
@@ -71,10 +96,12 @@ class DefectType extends Component {
             <View style = {styles.defectViewContainer}>
                 <TextInput style = {styles.defectTypeInputText}
                     placeholder = "Type"
+                    underlineColorAndroid = "transparent"
                 />
                 <TextInput style = {styles.defectQtyInputText}
                     placeholder = "Qty"
                     keyboardType = "numeric"
+                    underlineColorAndroid = "transparent"
                 />
             </View>
         );
@@ -92,8 +119,8 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     skuImage: {
-        height: 150,
-        width: 150
+        height: 96,
+        width: 96
     },
     vskuLable:{
         marginLeft: 16,
@@ -125,19 +152,83 @@ const styles = StyleSheet.create({
     }, 
     defectTypeInputText: {
         height: 56,
-        width: 192
+        width: 192,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0, 0.06)'
     },
     defectQtyInputText: {
         marginLeft: 16,
         height: 56,
-        width: 88
+        width: 88,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0, 0.06)'
+    },
+    addDefectButtonView: {
+        marginLeft: 32,
+        marginTop: 32,
+        height: 48,
+        width: 120
     },
     addDefectButton:{
         height: 20,
-        marginLeft: 32,
-        marginTop: 24,
+        marginTop: 14,
         fontSize: 14,
         color: '#007ac1'
+    },
+    replacedQuantityContainer: {
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 16,
+        height: 56,
+        flexDirection: "row"
+    },
+    defectiveQuantityContainer: {
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 32,
+        height: 56,
+        flexDirection: "row"
+    },
+    defectiveQuantityLabel: {
+        height: 24,
+        fontSize: 16,
+        marginTop: 16
+    },
+    defectiveQuantityInput: {
+        marginLeft: 70,
+        height: 56,
+        width: 88,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0, 0.06)'
+    },
+    replacedQuantityLabel: {
+        height: 24,
+        fontSize: 16,
+        marginTop: 16
+    },
+    replacedQuantityInput: {
+        marginLeft: 70,
+        height: 56,
+        width: 88,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0, 0.06)'
+    },
+    doneButton: {
+        height: 40,
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 24,
+        marginBottom: 32,
+        backgroundColor: '#007ac1',
+        borderRadius: 4,
+        alignItems: "center"
+    },
+    doneButtonText: {
+        textAlign: "center",
+        fontSize: 14,
+        color: 'white',
+        marginTop: 10,
+        alignItems: "center"
     }
 });
 
