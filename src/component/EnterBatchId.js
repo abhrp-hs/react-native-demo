@@ -9,8 +9,23 @@ export default class EnterBatchId extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            batchId : ''
+            batchId : '',
+            storedAuthToken : ''
         };
+    }
+
+    componentWillMount() {
+        this.getStorageData();
+    }
+
+    getStorageData = async () => {
+        try {
+            const token = await AsyncStorage.getItem('@AuthToken:key');
+            this.setState({storedAuthToken: token});
+            console.log(token);
+        } catch (error){
+            console.log(error);
+        }
     }
     
     onSubmitPress = () => {
@@ -23,7 +38,7 @@ export default class EnterBatchId extends Component {
                 headers: {
                     'Accept' : 'application/json',
                     'Content-Type' : 'application/json',               
-                    'Auth-Token' : this.props.text
+                    'Auth-Token' : this.state.storedAuthToken
                 }
             })
             .then((response) => response.json())
@@ -33,7 +48,13 @@ export default class EnterBatchId extends Component {
                     //Alert.alert(JSON.stringify(responseData));
                     Actions.skuSearch({payload : responseData.payload, id : batchId});
                 } catch (error) {
+                    Toast.show("Auth Token Expired", Toast.LONG);
+                    Actions.loginScreen();
                 }
+            })
+            .catch((error) => {
+                Toast.show("Auth Token Expired.. Please log in again", Toast.SHORT);
+                Actions.loginScreen();
             })
             .done();
         }

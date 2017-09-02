@@ -52,10 +52,14 @@ export default class HSLogin extends Component {
                     Toast.show("Logged in successfully with " + responseData.email, Toast.LONG);                
                     await AsyncStorage.setItem('@AuthToken:key', responseData.auth_token);
                     await AsyncStorage.setItem('@Email:key', responseData.email);                    
-                    Actions.enterBatchId({text : responseData.auth_token});
+                    //Actions.enterBatchId({text : responseData.auth_token});
+                    Actions.enterBatchId();
                 } catch (error) {
                     Toast.show('Error While Saving Token', Toast.LONG);                    
                 }
+            })
+            .catch((error) => {
+                Toast.show("Hello Request Failed", Toast.SHORT);
             })
             .done();
         }
