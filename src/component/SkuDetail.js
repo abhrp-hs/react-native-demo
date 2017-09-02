@@ -33,7 +33,7 @@ export default class SkuDetail extends Component {
     }
 
     onDoneClick() {
-        Actions.summary({summary :  "This is summary page"});
+        Alert.alert("Done Button has been Clicked");
     }
 
     render() {

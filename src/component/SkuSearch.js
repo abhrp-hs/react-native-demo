@@ -15,6 +15,10 @@ export default class SkuSearch extends Component {
         };
     }
 
+    onProceedToSummary() {
+        Actions.summary({summary: "This is summary page"});
+    }
+
     render() {
         return(
             <View style = { styles.searchSkuPage}>
@@ -38,6 +42,7 @@ export default class SkuSearch extends Component {
                     </Text>
                     <TouchableHighlight 
                         style = {styles.proceedButton}
+                        onPress = {this.onProceedToSummary.bind(this)}
                         underlayColor = "#007ac1">
                         <Text style = {styles.proceedButtonText}>
                             PROCEED TO SUMMARY
