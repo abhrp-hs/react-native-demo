@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import NavBar, { NavTitle } from "react-native-nav";
 import Toast from "react-native-simple-toast";
 import { Actions, ActionConst } from "react-native-router-flux";
-import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, ListView, Image, Picker } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, ScrollView, Image, Picker } from "react-native";
+
+import eyeImag from '../images/eye_black.png';
 
 
 export default class Summary extends Component {
@@ -22,14 +24,47 @@ export default class Summary extends Component {
                         Summary
                     </NavTitle>
                 </NavBar>
-                <Picker style = {styles.inspectResultPicker}
-                        selectedValue = {this.state.inspectResult}
-                        onValueChange = {(itemValue, itemIndex) => this.setState({inspectResult: itemValue})}>
-                        <Picker.Item label = "Accept" value = "Accept"/>
-                        <Picker.Item label = "Partially Accept" value = "Partially Accept"/>
-                        <Picker.Item label = "Reject" value = "Reject"/> 
-                </Picker>
-                <Text>{this.props.summary}</Text>
+                <ScrollView>
+                    <View style = {styles.inspectResultPicker}>
+                        <Picker
+                            selectedValue = {this.state.inspectResult}
+                            onValueChange = {(itemValue, itemIndex) => this.setState({inspectResult: itemValue})}>
+                            <Picker.Item label = "Accept" value = "Accept"/>
+                            <Picker.Item label = "Partially Accept" value = "Partially Accept"/>
+                            <Picker.Item label = "Reject" value = "Reject"/> 
+                        </Picker>
+                    </View>
+                    <View style = {styles.inspectionDate}>
+                    </View>
+                    <View style = {styles.inspectedPiecesContainer}>
+                        <Text style = {styles.inspectedPiecesLabel}>
+                            No. of inspected pieces 
+                        </Text>
+                        <TextInput style = {styles.inspectedPiecesInput}
+                            placeholder = "Qty"
+                            keyboardType = "numeric"
+                        />
+                    </View>
+                    <View style = {styles.inspectedPiecesContainer}>
+                        <Text style = {styles.inspectedPiecesLabel}>
+                            No. of rejected pieces
+                        </Text>
+                        <TextInput style = {styles.inspectedPiecesInput}
+                            placeholder = "Qty"
+                            keyboardType = "numeric"
+                        />
+                    </View>
+                    <View style = {styles.remarkContainer}>
+                        <TextInput placeholder = "Remarks"/>
+                    </View>
+                    <View style = {styles.uploadCOntainer}> 
+                        <Image source = {eyeImag} style = {styles.uploadIcon} />
+                        <Text style = {styles.uploadButtonText}>Upload images</Text>
+                    </View>
+                    <TouchableHighlight style = {styles.submitButton} >
+                        <Text style = {styles.submitButtonText}>SUBMIT</Text>
+                    </TouchableHighlight>
+                </ScrollView>
             </View>
         );
     }
@@ -47,5 +82,83 @@ const styles = StyleSheet.create({
         height: 56,
         borderRadius: 4,
         backgroundColor: 'rgba(0,0,0, 0.06)'
+    },
+    inspectionDate: {
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 24,
+        height: 56,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0, 0.06)'
+    },
+    inspectedPiecesContainer: {
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 24,
+        height: 56,
+        flexDirection: "row"
+    },
+    inspectedPiecesLabel: {
+        marginTop: 16,
+        height: 20,
+        width: 176,
+        fontSize: 16,
+        color: 'black'
+    },
+    inspectedPiecesInput: {
+        marginLeft: 30,
+        height: 56,
+        width: 88,
+        flex: 1,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0,0.06)'
+    },
+    remarkContainer: {
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 24,
+        height: 96,
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0,0.06)'
+    },
+    uploadCOntainer: {
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 24,
+        height: 56,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#007ac1',
+        flexDirection : "row"
+    },
+    uploadIcon: {
+        height: 24,
+        width: 24,
+        marginLeft: 75,
+        marginTop: 16
+    }, 
+    uploadButtonText: {
+        marginLeft: 8,
+        marginTop: 16,
+        height: 24,
+        fontSize: 16,
+        color: '#007ac1'
+    },
+    submitButton: {
+        height: 40,
+        marginLeft: 32,
+        marginRight: 32,
+        marginTop: 24,
+        marginBottom: 32,
+        backgroundColor: '#007ac1',
+        borderRadius: 4,
+        alignItems: "center"
+    },
+    submitButtonText: {
+        textAlign: "center",
+        fontSize: 14,
+        color: 'white',
+        marginTop: 10,
+        alignItems: "center"
     }
 });
