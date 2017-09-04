@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NavBar, { NavTitle } from "react-native-nav";
+import Toast from "react-native-simple-toast";
 import { Actions, ActionConst } from "react-native-router-flux";
 import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, Image, ScrollView, ListView } from "react-native";
 
@@ -10,14 +11,19 @@ export default class SkuDetail extends Component {
         const defectRowArray = [];
         this.state = {
             dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-            refreshing: false
+            refreshing: false,
+            rowDefectType: "",
+            rowDefectQuantity: "",
+            arrayOfDefects: [],
+            arrayOfQuantity: [],
+            defectDictionary: {}
         };
     }
 
     componentWillMount() {
         this.defectRowArray = [];
         for (let i = 0; i < 1; i++) {
-            this.defectRowArray.push({ keyy: i, data: "row" + i });
+            this.defectRowArray.push({ keyy: i, data: "row" + i, index: i + "" });
         }
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.defectRowArray)
@@ -25,15 +31,45 @@ export default class SkuDetail extends Component {
     }
 
     addDefectRow() {
-        let i = this.defectRowArray.length;
-        this.defectRowArray.push({ keyy: i, data: "row" + i });
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(this.defectRowArray)
-        });
+        if (this.state.rowDefectType != '' && this.state.rowDefectQuantity != '') {
+            let i = this.defectRowArray.length;
+            this.defectRowArray.push({ keyy: i, data: "row" + i, index: i + "" });
+            this.setState({
+              dataSource: this.state.dataSource.cloneWithRows(
+                this.defectRowArray
+              ),
+              rowDefectType: '',
+              rowDefectQuantity: ''
+            });
+        } else {
+            Alert.alert("Please fill all values.");
+        }        
     }
 
     onDoneClick() {
-        Alert.alert("Done Button has been Clicked");
+        for (let i = 0; i < this.state.arrayOfDefects.length; i++) {
+          Toast.show(this.state.arrayOfDefects[i].defect_type, Toast.SHORT);
+        }
+    }
+
+    onDefectTypeTextChange(defectText, rowdata) {
+        this.setState({rowDefectType : defectText});
+        if (defectText != '') {
+            // Remove item from array from on going change position ...
+            this.state.arrayOfDefects.splice(rowdata.index, 1);
+            // Add the changed text at specific position ...
+            this.state.arrayOfDefects.splice(rowdata.index, 0, {"defect_type" : defectText});
+        }
+    }
+
+    onDefectQuantityTextChange(defectQuantity, rowdata) {
+        this.setState({rowDefectQuantity : defectQuantity});
+        if (defectQuantity != '') {
+            // remove item from array from on going chnage position ...
+            this.state.arrayOfQuantity.splice(rowdata.index, 1);
+            // Add the changed text at specific position ...
+            this.state.arrayOfQuantity.splice(rowdata.index, 0, {"defect_qty" : defectQuantity});
+        }
     }
 
     render() {
@@ -57,7 +93,23 @@ export default class SkuDetail extends Component {
                     <Text style = {styles.defectsLabel}>Defects</Text>
                     <ListView
                         dataSource = {this.state.dataSource}
-                        renderRow = {rowdata => <DefectType />}
+                        renderRow = {rowdata => <View style = {styles.defectViewContainer}>
+                                                        <View style = {styles.defectTypeInputText}>
+                                                            <TextInput style = {{marginLeft: 16}}
+                                                                placeholder = "Type"
+                                                                onChangeText = {(defectText) => this.onDefectTypeTextChange(defectText, rowdata)}                                                
+                                                                underlineColorAndroid = "transparent"
+                                                            />
+                                                        </View>
+                                                        <View style = {styles.defectQtyInputText}>
+                                                            <TextInput style = {{marginLeft: 16}}
+                                                                placeholder = "Qty"
+                                                                keyboardType = "numeric"
+                                                                onChangeText = {rowDefectQuantity => this.setState({rowDefectQuantity})}
+                                                                underlineColorAndroid = "transparent"
+                                                            />
+                                                        </View>
+                                                </View>}
                     />
                     <TouchableHighlight 
                             style = {styles.addDefectButtonView} 
@@ -73,6 +125,7 @@ export default class SkuDetail extends Component {
                             <TextInput style = {{marginLeft: 16}}
                                 keyboardType = "numeric"
                                 underlineColorAndroid = "transparent"
+                                onChangeText = {defectQuantity => this.setState({defectQuantity})}
                                 placeholder = "Qty"
                             />
                         </View>
@@ -106,6 +159,7 @@ class DefectType extends Component {
                 <View style = {styles.defectTypeInputText}>
                     <TextInput style = {{marginLeft: 16}}
                         placeholder = "Type"
+                        onChangeText = {rowDefect => this.setState({rowDefect})}
                         underlineColorAndroid = "transparent"
                     />
                 </View>
@@ -113,6 +167,7 @@ class DefectType extends Component {
                     <TextInput style = {{marginLeft: 16}}
                         placeholder = "Qty"
                         keyboardType = "numeric"
+                        onChangeText = {rowQuantity => this.setState({rowQuantity})}
                         underlineColorAndroid = "transparent"
                     />
                 </View>

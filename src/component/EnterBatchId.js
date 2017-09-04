@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NavBar, { NavTitle } from "react-native-nav";
 import Toast from "react-native-simple-toast";
 import { Actions, ActionConst } from "react-native-router-flux";
-import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, AsyncStorage, Keyboard } from "react-native";
 
 export default class EnterBatchId extends Component {
 
@@ -33,7 +33,10 @@ export default class EnterBatchId extends Component {
         if (batchId == '') {
             Alert.alert("Please Enter Batch ID")
         } else {
-            fetch('https://internals.hopscotch.in/ops_api/quality_control/batch/' + batchId, {
+            Keyboard.dismiss();
+            debugGetBatch = 'http://rubydev.hopscotch.in/ops_api/quality_control/batch/';
+            releaseGetBatch = "https://internals.hopscotch.in/ops_api/quality_control/batch/";
+            fetch(debugGetBatch + batchId, {
                 method : 'GET',
                 headers: {
                     'Accept' : 'application/json',
@@ -46,7 +49,11 @@ export default class EnterBatchId extends Component {
                 try {
                     //Toast.show("Response " + responseData.payload.vendor_id, Toast.LONG);
                     //Alert.alert(JSON.stringify(responseData));
-                    Actions.skuSearch({payload : responseData.payload, id : batchId});
+                    if (responseData.payload.hasOwnProperty("vsku_details")) {
+                        Actions.skuSearch({payload : responseData.payload, id : batchId});
+                    } else {
+                        Alert.alert("There is no inspection pending for this batch");
+                    }
                 } catch (error) {
                     Toast.show("Auth Token Expired", Toast.LONG);
                     Actions.loginScreen();

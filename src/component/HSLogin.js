@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from "react";
 import NavBar, { NavTitle } from "react-native-nav";
 import Toast from "react-native-simple-toast";
 import { Actions, ActionConst } from "react-native-router-flux";
-import { StyleSheet, TextInput, View, TouchableHighlight, Text, Alert, AsyncStorage } from "react-native";
+import { StyleSheet, TextInput, View, TouchableHighlight, Text, Alert, AsyncStorage, Keyboard } from "react-native";
 
 export default class HSLogin extends Component {
 
@@ -30,38 +30,39 @@ export default class HSLogin extends Component {
         const {password} = this.state;
         if (userEmail == '' || password == '') {
             Alert.alert("Please Enter All Field")
-        }
-        if (!this.validateEmail(userEmail)) {
+        } else if (!this.validateEmail(userEmail)) {
             Alert.alert("Please Enter Correct Email");
         } else {
-            fetch('https://internals.hopscotch.in/ops_api/login', {
-                method: 'POST',
-                headers: {
-                    'Accept' : 'application/json',
-                    'Content-Type' : 'application/json',
-                    'Host' : 'internals.hopscotch.in',
-                    'Origin' : 'https://internals.hopscotch.in'
-                },
-                body: JSON.stringify({
-                    email: userEmail,
-                    password: password,
-                })})
-            .then((response) => response.json())
-            .then(async (responseData) => {
+            Keyboard.dismiss();
+            debugLoginUrl = 'http://rubydev.hopscotch.in/ops_api/login';
+            releaseLoginUrl = 'https://internals.hopscotch.in/ops_api/login';
+            fetch(debugLoginUrl, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                email: userEmail,
+                password: password
+              })
+            })
+              .then(response => response.json())
+              .then(async responseData => {
                 try {
-                    Toast.show("Logged in successfully with " + responseData.email, Toast.LONG);                
-                    await AsyncStorage.setItem('@AuthToken:key', responseData.auth_token);
-                    await AsyncStorage.setItem('@Email:key', responseData.email);                    
-                    //Actions.enterBatchId({text : responseData.auth_token});
-                    Actions.enterBatchId();
+                  Toast.show("Logged in successfully with " + responseData.email, Toast.LONG);
+                  await AsyncStorage.setItem("@AuthToken:key", responseData.auth_token);
+                  await AsyncStorage.setItem("@Email:key", responseData.email);
+                  //Actions.enterBatchId({text : responseData.auth_token});
+                  Actions.enterBatchId();
                 } catch (error) {
-                    Toast.show('Error While Saving Token', Toast.LONG);                    
+                  Toast.show("Error While Saving Token", Toast.LONG);
                 }
-            })
-            .catch((error) => {
+              })
+              .catch(error => {
                 Toast.show("Hello Request Failed", Toast.SHORT);
-            })
-            .done();
+              })
+              .done();
         }
     }
 
