@@ -16,7 +16,9 @@ export default class SkuDetail extends Component {
             rowDefectQuantity: "",
             arrayOfDefects: [],
             arrayOfQuantity: [],
-            defectDictionary: {}
+            defectDictionary: {},
+            totalDefectiveQuantity: '',
+            totalReplacedQuantity: ''
         };
     }
 
@@ -47,9 +49,50 @@ export default class SkuDetail extends Component {
     }
 
     onDoneClick() {
-        for (let i = 0; i < this.state.arrayOfDefects.length; i++) {
-          Toast.show(this.state.arrayOfDefects[i].defect_type, Toast.SHORT);
+        defectDictionary = {};
+        if (this.props.skudata.hasOwnProperty("vsku")) {
+            defectDictionary.vsku = this.props.skudata.vsku;            
         }
+        if (this.props.skudata.hasOwnProperty("color")) {
+            defectDictionary.color = this.props.skudata.color;
+        }
+        if (this.props.skudata.hasOwnProperty("image")) {
+            defectDictionary.image = this.props.skudata.image;
+        }
+        if (this.props.skudata.hasOwnProperty("total_quantity")) {
+            defectDictionary.total_quantity = this.props.skudata.total_quantity;
+        }
+        if (this.state.totalDefectiveQuantity == '') {
+            Alert.alert("Defective Quantity can't be empty");
+            return;
+        } else {
+            defectDictionary.total_defective_quantity = this.state.totalDefectiveQuantity;
+        } 
+        if (this.state.totalReplacedQuantity == '') {
+            Alert.alert("Replaced Quantity can't be empty");
+            return;
+        } else {
+            defectDictionary.total_replaced_quantity = this.state.totalReplacedQuantity;
+        }
+        
+        let finalArray = [];
+        for (let i = 0; i < this.state.arrayOfDefects.length; i++) {
+            if (i < this.state.arrayOfQuantity.length) {        
+                let obj = {};
+                if (this.state.arrayOfDefects[i].hasOwnProperty("defect_type")) {  
+                    obj.defect_type = this.state.arrayOfDefects[i].defect_type;      
+                } 
+                if (this.state.arrayOfQuantity[i].hasOwnProperty("defect_qty")) {
+                    obj.defect_qty = this.state.arrayOfQuantity[i].defect_qty;                          
+                }                
+                finalArray.push(obj);
+            } else {
+                Alert.alert("Please fill all values");
+                return;
+            }
+        }
+        defectDictionary.defect_details = finalArray;
+        Toast.show(JSON.stringify(defectDictionary) + "", Toast.LONG);
     }
 
     onDefectTypeTextChange(defectText, rowdata) {
@@ -105,7 +148,7 @@ export default class SkuDetail extends Component {
                                                             <TextInput style = {{marginLeft: 16}}
                                                                 placeholder = "Qty"
                                                                 keyboardType = "numeric"
-                                                                onChangeText = {rowDefectQuantity => this.setState({rowDefectQuantity})}
+                                                                onChangeText = {defectQuantity => this.onDefectQuantityTextChange(defectQuantity, rowdata)}
                                                                 underlineColorAndroid = "transparent"
                                                             />
                                                         </View>
@@ -120,22 +163,23 @@ export default class SkuDetail extends Component {
                         </Text>
                     </TouchableHighlight>            
                     <View style = {styles.defectiveQuantityContainer}>
-                        <Text style = {styles.defectiveQuantityLabel}>Defective quantity</Text>
+                        <Text style = {styles.defectiveQuantityLabel}>Defective quantity *</Text>
                         <View style = {styles.defectiveQuantityInput}>
                             <TextInput style = {{marginLeft: 16}}
                                 keyboardType = "numeric"
                                 underlineColorAndroid = "transparent"
-                                onChangeText = {defectQuantity => this.setState({defectQuantity})}
+                                onChangeText = {totalDefectiveQuantity => this.setState({totalDefectiveQuantity})}
                                 placeholder = "Qty"
                             />
                         </View>
                     </View>
                     <View style = {styles.replacedQuantityContainer}>
-                        <Text style = {styles.replacedQuantityLabel}>Replaced Quantity</Text>
+                        <Text style = {styles.replacedQuantityLabel}>Replaced Quantity *</Text>
                         <View style = {styles.replacedQuantityInput}>
                             <TextInput style = {{marginLeft: 16}}
                                 keyboardType = "numeric"
                                 underlineColorAndroid = "transparent"
+                                onChangeText = {totalReplacedQuantity => this.setState({totalReplacedQuantity})}
                                 placeholder = "Qty"
                             />
                         </View>

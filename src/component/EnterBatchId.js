@@ -49,8 +49,12 @@ export default class EnterBatchId extends Component {
                 try {
                     //Toast.show("Response " + responseData.payload.vendor_id, Toast.LONG);
                     //Alert.alert(JSON.stringify(responseData));
-                    if (responseData.payload.hasOwnProperty("vsku_details")) {
-                        Actions.skuSearch({payload : responseData.payload, id : batchId});
+                    if ( responseData.hasOwnProperty("payload")) {                        
+                        if (responseData.payload.hasOwnProperty("vsku_details")) {
+                            Actions.skuSearch({payload : responseData.payload, id : batchId});
+                        } else {
+                            Alert.alert("There is no inspection pending for this batch");
+                        }
                     } else {
                         Alert.alert("There is no inspection pending for this batch");
                     }
