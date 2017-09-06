@@ -93,10 +93,15 @@ export default class SkuDetail extends Component {
                 return;
             }
         }
+        if (finalArray.length == 0) {
+            Alert.alert("Please enter Defect Type and Quantity");
+            return;
+        }
         defectDictionary.defect_details = finalArray;
-        //Toast.show(JSON.stringify(defectDictionary) + "", Toast.LONG);
-        skuSearch.helloWorld(defectDictionary);
+        //skuSearch.helloWorld(defectDictionary);
+        //this.props.callBackFromParent(defectDictionary);
         Actions.pop();
+        Actions.refresh({data : defectDictionary});
     }
 
     onDefectTypeTextChange(defectText, rowdata) {

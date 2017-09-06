@@ -11,8 +11,11 @@ export default class SkuSearch extends Component {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         const dataResponse = this.props.payload.vsku_details;
         this.state = {
-            dataSource: ds.cloneWithRows(dataResponse)
+            dataSource: ds.cloneWithRows(dataResponse),
+            totalNoOfSku: dataResponse.length,
+            totalNoOfReportedSku: 0,
         };
+        this.callBackParent = this.callBackParent.bind(this);
     }
 
     static helloWorld(skuDefectData) {
@@ -21,6 +24,18 @@ export default class SkuSearch extends Component {
 
     onProceedToSummary() {
         Actions.summary({summary: "This is summary page"});
+    }
+
+    callBackParent = (jsondata) => {
+        Toast.show(JSON.stringify(jsondata) + "", Toast.LONG);
+    }
+
+    onImageClick(rowData) {
+        Actions.skuDetail({skudata : rowData});
+    }
+
+    componentWillReceiveProps(data) {
+        Toast.show(JSON.stringify(this.props.data) + "hh", Toast.LONG);
     }
 
     render() {
@@ -39,11 +54,27 @@ export default class SkuSearch extends Component {
                 </View>
                 <ListView style = {styles.listViewContainer} 
                     dataSource = {this.state.dataSource}
-                    renderRow={rowData => <RowSku image={rowData.image} vsku ={rowData.vsku} skudata = {rowData}/>}/>
+
+                    renderRow = {rowData => <View style={styles.skuRowContainer}>
+                                                <TouchableHighlight 
+                                                    onPress={() => this.onImageClick(rowData)}
+                                                    underlayColor = "white">
+                                                    <Image source={{ uri: rowData.image }} style={styles.skuPhoto} />
+                                                </TouchableHighlight>
+                                                <TouchableHighlight 
+                                                    style = {{height: 72}}
+                                                    underlayColor = "white"
+                                                    onPress={() => this.onImageClick(rowData)}>
+                                                    <Text style={styles.vskuText}>
+                                                        {rowData.vsku}
+                                                    </Text>
+                                                </TouchableHighlight>
+                                            </View>} />
                 <View style = {styles.footer}>
-                    <Text style = {styles.noOfSkuText}>
-                        0 of 122 VSKUs reported
-                    </Text>
+                    <View style = {styles.reportedSkuLabel}>
+                        <Text style = {{fontSize: 12, color: 'rgba(0,0,0,0.56)'}}>{this.state.totalNoOfReportedSku} </Text>
+                        <Text style = {{fontSize: 12, color: 'rgba(0,0,0, 0.56)'}}>of {this.state.totalNoOfSku} VSKUs Reported </Text>
+                    </View>
                     <TouchableHighlight 
                         style = {styles.proceedButton}
                         onPress = {this.onProceedToSummary.bind(this)}
@@ -58,15 +89,17 @@ export default class SkuSearch extends Component {
     }
 }
 
+
+
 class RowSku extends Component {
     onImageClick(text) {
-        Actions.skuDetail({skudata : this.props.skudata});
+        Actions.skuDetail({skudata : this.props.skudata, });
         console.log(text);
     }
     render () {
         return (
             <View style={styles.skuRowContainer}>
-                <TouchableHighlight 
+                <TouchableHighlight
                     onPress={() => this.onImageClick(this.props.skudata)}
                     underlayColor = "white">
                     <Image source={{ uri: this.props.image }} style={styles.skuPhoto} />
@@ -133,6 +166,11 @@ const styles = StyleSheet.create({
     bottom: -1,
     shadowOffset: { width: 0, height: 2 },
     elevation: 1
+  },
+  reportedSkuLabel: {
+    marginLeft: 32,
+    marginTop: 12,
+    flexDirection: "row"
   },
   skuRowContainer: {
     flex: 1,
