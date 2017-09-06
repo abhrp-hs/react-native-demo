@@ -4,6 +4,8 @@ import Toast from "react-native-simple-toast";
 import { Actions, ActionConst } from "react-native-router-flux";
 import { View, Text, StyleSheet, TextInput, TouchableHighlight, Alert, Image, ScrollView, ListView } from "react-native";
 
+import skuSearch from './SkuSearch';
+
 export default class SkuDetail extends Component {
 
     constructor(props) {
@@ -92,7 +94,9 @@ export default class SkuDetail extends Component {
             }
         }
         defectDictionary.defect_details = finalArray;
-        Toast.show(JSON.stringify(defectDictionary) + "", Toast.LONG);
+        //Toast.show(JSON.stringify(defectDictionary) + "", Toast.LONG);
+        skuSearch.helloWorld(defectDictionary);
+        Actions.pop();
     }
 
     onDefectTypeTextChange(defectText, rowdata) {

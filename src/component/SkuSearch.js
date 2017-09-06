@@ -15,6 +15,10 @@ export default class SkuSearch extends Component {
         };
     }
 
+    static helloWorld(skuDefectData) {
+        Toast.show(JSON.stringify(skuDefectData) + "", Toast.LONG);
+    }
+
     onProceedToSummary() {
         Actions.summary({summary: "This is summary page"});
     }
